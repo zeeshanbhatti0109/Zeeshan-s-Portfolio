@@ -3,20 +3,24 @@ import SectionLabel from "../components/SectionLabel";
 import Reveal from "../components/Reveal";
 import Button from "../components/Button";
 import { processSteps } from "../data/process";
+import { getSeoConfig, getPageHeading, getCtaContent } from "../data/config";
 
 export default function Process() {
+  const seoConfig = getSeoConfig("process");
+  const pageHeading = getPageHeading("process");
+  const ctaContent = getCtaContent("process");
   return (
     <>
       <SEO
-        title="Process"
-        description="How a project moves from first conversation to launch — discover, plan, design, build, test and launch."
+        title={seoConfig.title}
+        description={seoConfig.description}
       />
       <header className="page-hero">
         <div className="container">
           <Reveal>
             <SectionLabel>Process</SectionLabel>
             <h1 className="page-hero__heading">
-              How a project actually moves from idea to something live.
+              {pageHeading}
             </h1>
           </Reveal>
         </div>
@@ -44,11 +48,11 @@ export default function Process() {
       <section className="cta-banner">
         <div className="container cta-banner__inner">
           <Reveal as="div">
-            <h2 className="cta-banner__heading">Ready to start with step one?</h2>
-            <p className="cta-banner__text">A short conversation is all it takes to get moving.</p>
+            <h2 className="cta-banner__heading">{ctaContent.heading}</h2>
+            <p className="cta-banner__text">{ctaContent.text}</p>
           </Reveal>
           <Reveal delay={100}>
-            <Button to="/contact" variant="primary">Start a project</Button>
+            <Button to={ctaContent.buttonTo} variant="primary">{ctaContent.buttonText}</Button>
           </Reveal>
         </div>
       </section>

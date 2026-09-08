@@ -3,32 +3,16 @@ import { Mail, MapPin, Code2, Briefcase, Phone, ArrowUpRight } from "lucide-reac
 import SEO from "../components/SEO";
 import SectionLabel from "../components/SectionLabel";
 import Reveal from "../components/Reveal";
-
-const projectTypes = [
-  "Business Website",
-  "WordPress Website",
-  "React / Next.js",
-  "Laravel / PHP",
-  "Custom Web Application",
-  "Website Redesign",
-  "Performance Optimization",
-  "Other",
-];
-
-const budgets = [
-  "Under $500",
-  "$500 – $1,500",
-  "$1,500 – $5,000",
-  "$5,000+",
-  "Not sure yet",
-];
+import { getSeoConfig, getContactConfig, getPersonalInfo } from "../data/config";
 
 export default function Contact() {
+  const contactConfig = getContactConfig();
+  const personal = getPersonalInfo();
   const [form, setForm] = useState({
     name: "",
     email: "",
-    projectType: projectTypes[0],
-    budget: budgets[0],
+    projectType: contactConfig.projectTypes[0],
+    budget: contactConfig.budgets[0],
     message: "",
   });
   const [sent, setSent] = useState(false);
@@ -40,8 +24,8 @@ export default function Contact() {
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nProject type: ${form.projectType}\nBudget: ${form.budget}\n\n${form.message}`
     );
-    window.location.href = `mailto:zeeshanbhatti0109@gmail.com?subject=${encodeURIComponent(
-      "New project inquiry — " + form.projectType
+    window.location.href = `mailto:${personal.email}?subject=${encodeURIComponent(
+      contactConfig.emailSubject + form.projectType
     )}&body=${body}`;
     setSent(true);
   };
@@ -49,8 +33,8 @@ export default function Contact() {
   return (
     <>
       <SEO
-        title="Contact"
-        description="Get in touch to start a web development project — business websites, WordPress, React, Laravel and custom applications."
+        title={getSeoConfig("contact").title}
+        description={getSeoConfig("contact").description}
       />
       <header className="page-hero">
         <div className="container">
@@ -80,13 +64,13 @@ export default function Contact() {
               <div className="field">
                 <label htmlFor="projectType">Project type</label>
                 <select id="projectType" value={form.projectType} onChange={update("projectType")}>
-                  {projectTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+                  {contactConfig.projectTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div className="field">
                 <label htmlFor="budget">Budget</label>
                 <select id="budget" value={form.budget} onChange={update("budget")}>
-                  {budgets.map((b) => <option key={b} value={b}>{b}</option>)}
+                  {contactConfig.budgets.map((b) => <option key={b} value={b}>{b}</option>)}
                 </select>
               </div>
             </div>
@@ -99,7 +83,7 @@ export default function Contact() {
               <p className="contact-form__note" role="status">
                 Opening your email client to send this — if it didn't open,
                 write to me directly at{" "}
-                <a href="mailto:zeeshanbhatti0109@gmail.com">zeeshanbhatti0109@gmail.com</a>.
+                <a href={`mailto:${personal.email}`}>{personal.email}</a>.
               </p>
             )}
           </Reveal>
@@ -109,29 +93,29 @@ export default function Contact() {
               <Mail size={18} />
               <div>
                 <p className="contact-info__label">Email</p>
-                <a href="mailto:zeeshanbhatti0109@gmail.com">zeeshanbhatti0109@gmail.com</a>
+                <a href={`mailto:${personal.email}`}>{personal.email}</a>
               </div>
             </div>
             <div className="contact-info__item">
               <Phone size={18} />
               <div>
                 <p className="contact-info__label">Phone</p>
-                <a href="tel:+923113629211">0311-3629211</a>
+                <a href={`tel:${personal.phone}`}>{personal.phoneDisplay}</a>
               </div>
             </div>
             <div className="contact-info__item">
               <MapPin size={18} />
               <div>
                 <p className="contact-info__label">Location</p>
-                <p>Multan, Pakistan</p>
+                <p>{personal.location}</p>
               </div>
             </div>
             <div className="contact-info__item">
               <Code2 size={18} />
               <div>
                 <p className="contact-info__label">GitHub</p>
-                <a href="https://github.com/zeeshanbhatti0109/" target="_blank" rel="noreferrer">
-                  github.com/zeeshanbhatti0109 <ArrowUpRight size={13} />
+                <a href={personal.social.github} target="_blank" rel="noreferrer">
+                  {personal.social.githubDisplay} <ArrowUpRight size={13} />
                 </a>
               </div>
             </div>
@@ -139,8 +123,8 @@ export default function Contact() {
               <Briefcase size={18} />
               <div>
                 <p className="contact-info__label">LinkedIn</p>
-                <a href="https://linkedin.com/in/zeeshanbhatti-45aa02378/" target="_blank" rel="noreferrer">
-                  linkedin.com/in/zeeshanbhatti <ArrowUpRight size={13} />
+                <a href={personal.social.linkedin} target="_blank" rel="noreferrer">
+                  {personal.social.linkedinDisplay} <ArrowUpRight size={13} />
                 </a>
               </div>
             </div>

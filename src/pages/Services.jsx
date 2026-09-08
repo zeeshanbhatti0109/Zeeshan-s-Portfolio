@@ -3,20 +3,24 @@ import SectionLabel from "../components/SectionLabel";
 import Reveal from "../components/Reveal";
 import Button from "../components/Button";
 import { services } from "../data/services";
+import { getSeoConfig, getPageHeading, getCtaContent } from "../data/config";
 
 export default function Services() {
+  const seoConfig = getSeoConfig("services");
+  const pageHeading = getPageHeading("services");
+  const ctaContent = getCtaContent("services");
   return (
     <>
       <SEO
-        title="Services"
-        description="Business websites, WordPress development, React and Next.js, Laravel and PHP, custom web applications, redesigns, performance and SEO."
+        title={seoConfig.title}
+        description={seoConfig.description}
       />
       <header className="page-hero">
         <div className="container">
           <Reveal>
             <SectionLabel>Services</SectionLabel>
             <h1 className="page-hero__heading">
-              Development services built around what your business actually needs.
+              {pageHeading}
             </h1>
           </Reveal>
         </div>
@@ -54,13 +58,13 @@ export default function Services() {
       <section className="cta-banner">
         <div className="container cta-banner__inner">
           <Reveal as="div">
-            <h2 className="cta-banner__heading">Not sure which service fits?</h2>
+            <h2 className="cta-banner__heading">{ctaContent.heading}</h2>
             <p className="cta-banner__text">
-              Tell me what you're trying to achieve and I'll tell you what actually makes sense to build.
+              {ctaContent.text}
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <Button to="/contact" variant="primary">Get in touch</Button>
+            <Button to={ctaContent.buttonTo} variant="primary">{ctaContent.buttonText}</Button>
           </Reveal>
         </div>
       </section>

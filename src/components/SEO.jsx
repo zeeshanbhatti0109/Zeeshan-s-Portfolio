@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { getPersonalInfo } from "../data/config";
 
 /**
  * Lightweight SEO helper — sets document title & meta description
@@ -6,7 +7,8 @@ import { useEffect } from "react";
  */
 export default function SEO({ title, description }) {
   useEffect(() => {
-    const fullTitle = title ? `${title} — Zeeshan` : "Zeeshan — Web Developer";
+    const personal = getPersonalInfo();
+    const fullTitle = title ? `${title} — ${personal.name}` : `${personal.name} — Web Developer`;
     document.title = fullTitle;
 
     const setMeta = (name, content, attr = "name") => {

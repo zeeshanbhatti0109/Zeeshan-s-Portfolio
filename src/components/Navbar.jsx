@@ -2,19 +2,14 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Button from "./Button";
-
-const links = [
-  { to: "/work", label: "Work" },
-  { to: "/services", label: "Services" },
-  { to: "/about", label: "About" },
-  { to: "/process", label: "Process" },
-  { to: "/contact", label: "Contact" },
-];
+import { getNavigation, getPersonalInfo } from "../data/config";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const links = getNavigation();
+  const personal = getPersonalInfo();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -35,8 +30,8 @@ export default function Navbar() {
     <>
       <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
         <div className="container nav__inner">
-          <NavLink to="/" className="nav__logo" aria-label="Zeeshan — home">
-            Zeeshan
+          <NavLink to="/" className="nav__logo" aria-label={`${personal.name} — home`}>
+            {personal.name}
           </NavLink>
 
           <nav className="nav__links" aria-label="Primary">
@@ -86,8 +81,8 @@ export default function Navbar() {
         </nav>
         <div className="nav-mobile__footer">
           <Button to="/contact" variant="primary">Let's talk</Button>
-          <a href="mailto:zeeshanbhatti0109@gmail.com" className="nav-mobile__email">
-            zeeshanbhatti0109@gmail.com
+          <a href={`mailto:${personal.email}`} className="nav-mobile__email">
+            {personal.email}
           </a>
         </div>
       </div>

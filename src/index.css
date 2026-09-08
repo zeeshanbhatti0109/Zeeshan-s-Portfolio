@@ -123,12 +123,31 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* Scroll reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.reveal--up {
+  transform: translateY(24px);
+}
+.reveal--down {
+  transform: translateY(-24px);
+}
+.reveal--left {
+  transform: translateX(24px);
+}
+.reveal--right {
+  transform: translateX(-24px);
+}
+.reveal--scale {
+  transform: scale(0.95);
+}
+.reveal--fade {
+  transform: none;
+}
+
 .reveal--visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateX(0) scale(1);
 }
 
 /* ============================================================
@@ -144,8 +163,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   padding: 14px 26px;
   border-radius: var(--radius-s);
   border: 1px solid transparent;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
 }
 .btn--primary {
   background: var(--ink);
@@ -153,7 +174,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .btn--primary:hover {
   background: var(--accent);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 73, 223, 0.3);
+}
+.btn--primary:active {
+  transform: translateY(0);
 }
 .btn--secondary {
   background: transparent;
@@ -163,6 +188,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .btn--secondary:hover {
   border-color: var(--ink);
   background: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .btn--ghost {
   background: transparent;
@@ -239,8 +266,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   transition: color 0.2s ease;
 }
 .nav__link:hover { color: var(--ink); }
-.nav__link--active { color: var(--ink); }
-.nav__link--active::after {
+.nav__link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -248,6 +274,18 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   bottom: -2px;
   height: 1px;
   background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.nav__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.nav__link--active { color: var(--ink); }
+.nav__link--active::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 .nav__cta { display: none; }
 .nav__toggle {
@@ -390,9 +428,13 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .footer__list a {
   color: rgba(250, 248, 243, 0.85);
   font-size: 15px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
-.footer__list a:hover { color: var(--accent); }
+.footer__list a:hover { 
+  color: var(--accent);
+  transform: translateX(4px);
+}
 .footer__muted { color: rgba(250, 248, 243, 0.45); font-size: 14px; }
 
 .footer__bottom {
@@ -445,6 +487,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   padding: 36px 32px;
   border-radius: var(--radius-m);
   max-width: 380px;
+  transition: transform 0.3s ease;
+}
+.hero__panel:hover {
+  transform: translateY(-4px);
 }
 .hero__panel-kicker {
   font-size: 14px;
@@ -524,9 +570,16 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
    ============================================================ */
 .project { margin-bottom: 64px; }
 .project:last-child { margin-bottom: 0; }
-.project__link { display: block; }
+.project__link { 
+  display: block;
+  transition: transform 0.3s ease;
+}
+.project__link:hover {
+  transform: translateY(-4px);
+}
 .project__link:hover .project__cta { color: var(--accent); gap: 12px; }
 .project__link:hover .project-visual { transform: scale(1.015); }
+.project__link:hover .project__name { color: var(--accent); }
 
 .project-visual {
   overflow: hidden;
@@ -534,6 +587,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .project-visual svg { width: 100%; height: 100%; display: block; }
+.project-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .project__visual { aspect-ratio: 16 / 10; }
 .project__visual--small { aspect-ratio: 4 / 3; }
@@ -643,6 +697,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .cap-grid__item {
   background: var(--paper);
   padding: 36px 32px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.cap-grid__item:hover {
+  background: var(--paper-dim);
+  transform: translateY(-2px);
 }
 .cap-grid__index {
   font-family: var(--font-display);
@@ -652,6 +711,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .cap-grid__item h3 {
   font-size: 21px;
   margin-top: 16px;
+  transition: color 0.3s ease;
+}
+.cap-grid__item:hover h3 {
+  color: var(--accent);
 }
 .cap-grid__item p {
   margin-top: 12px;
@@ -898,6 +961,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
+  transition: background 0.3s ease;
+}
+.service-row:hover {
+  background: rgba(250, 248, 243, 0.5);
 }
 .service-row__head {
   display: flex;
@@ -997,6 +1064,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   font-family: var(--font-display);
   font-size: 16px;
   color: var(--ink);
+  transition: color 0.3s ease, transform 0.3s ease;
+  cursor: default;
+}
+.tech-group__list li:hover {
+  color: var(--accent);
+  transform: translateX(4px);
 }
 @media (min-width: 700px) {
   .tech-groups { grid-template-columns: repeat(3, 1fr); }
@@ -1093,11 +1166,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   background: var(--white);
   color: var(--ink);
   resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 73, 223, 0.1);
+  transform: translateY(-1px);
 }
 .field-row {
   display: grid;

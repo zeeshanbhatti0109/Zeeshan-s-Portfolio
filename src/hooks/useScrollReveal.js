@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Adds a class once an element enters the viewport. Respects
  * prefers-reduced-motion by revealing immediately.
+ * Supports different animation types: fade, slide, scale, rotate
  */
 export function useScrollReveal(options = {}) {
   const ref = useRef(null);
@@ -22,7 +23,7 @@ export function useScrollReveal(options = {}) {
           observer.unobserve(node);
         }
       },
-      { threshold: 0, rootMargin: "0px 0px -8% 0px", ...options }
+      { threshold: 0.1, rootMargin: "0px 0px -10% 0px", ...options }
     );
 
     observer.observe(node);

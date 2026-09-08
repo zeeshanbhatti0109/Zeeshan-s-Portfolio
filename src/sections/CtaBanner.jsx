@@ -1,19 +1,20 @@
 import Reveal from "../components/Reveal";
 import Button from "../components/Button";
+import { getCtaContent } from "../data/config";
 
 export default function CtaBanner() {
+  const ctaContent = getCtaContent("home");
   return (
     <section className="cta-banner">
       <div className="container cta-banner__inner">
         <Reveal as="div">
-          <h2 className="cta-banner__heading">Let's build something worth visiting.</h2>
+          <h2 className="cta-banner__heading">{ctaContent.heading}</h2>
           <p className="cta-banner__text">
-            Tell me what you're working on, what you need, and where you'd
-            like to take it.
+            {ctaContent.text}
           </p>
         </Reveal>
         <Reveal delay={100}>
-          <Button to="/contact" variant="primary">Start a project</Button>
+          <Button to={ctaContent.buttonTo} variant="primary">{ctaContent.buttonText}</Button>
         </Reveal>
       </div>
     </section>

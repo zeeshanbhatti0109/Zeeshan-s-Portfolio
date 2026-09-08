@@ -9,6 +9,7 @@ export const projects = [
     year: "2024",
     tech: ["Laravel", "Filament PHP", "PHP", "MySQL", "Filament Shield"],
     layout: "featured",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     summary:
       "A resource planning system built for a business operating several factories at once, covering inventory, staff access and day-to-day operations from one dashboard.",
     overview:
@@ -30,9 +31,9 @@ export const projects = [
     outcome:
       "The system gives the business one place to manage inventory and staff access across multiple factories, replacing manual processes with structured, role-aware records.",
     gallery: [
-      { label: "Dashboard overview" },
-      { label: "Inventory management" },
-      { label: "Role & permission editor" },
+      { label: "Dashboard overview", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" },
+      { label: "Inventory management", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80" },
+      { label: "Role & permission editor", image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80" },
     ],
   },
   {
@@ -44,6 +45,7 @@ export const projects = [
     year: "2024",
     tech: ["WordPress", "Responsive Design", "SEO", "Plugins"],
     layout: "split",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
     summary:
       "A WordPress website for a rehabilitation center, structured around booking appointments and being found locally.",
     overview:
@@ -65,9 +67,9 @@ export const projects = [
     outcome:
       "Flexfit now has a professional web presence structured around the two things that matter for a local service business: being understood quickly, and being easy to contact.",
     gallery: [
-      { label: "Homepage" },
-      { label: "Services layout" },
-      { label: "Appointment form" },
+      { label: "Homepage", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80" },
+      { label: "Services layout", image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80" },
+      { label: "Appointment form", image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" },
     ],
   },
   {
@@ -79,6 +81,7 @@ export const projects = [
     year: "2023",
     tech: ["PHP", "JavaScript", "HTML", "CSS", "Bootstrap"],
     layout: "compact",
+    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80",
     summary:
       "A web-based task management application covering the full create, update, delete and organise workflow for teams.",
     overview:
@@ -100,9 +103,9 @@ export const projects = [
     outcome:
       "A complete, working task management tool that demonstrates the full CRUD cycle in a responsive, usable interface.",
     gallery: [
-      { label: "Task board" },
-      { label: "Task creation form" },
-    ],
+      { label: "Task board", image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80" },
+      { label: "Task creation form", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" },
+    ]
   },
 ];
 

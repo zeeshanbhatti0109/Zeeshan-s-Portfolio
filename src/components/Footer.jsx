@@ -1,36 +1,38 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { getPersonalInfo, getNavigation, getFooterContent, getCtaContent } from "../data/config";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const personal = getPersonalInfo();
+  const navigation = getNavigation();
+  const footerContent = getFooterContent();
+  const ctaContent = getCtaContent("footer");
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer__top">
           <Link to="/contact" className="footer__cta">
-            <span className="footer__cta-label">Currently open to new projects</span>
-            <span className="footer__cta-link">Let's talk <ArrowUpRight size={18} strokeWidth={2} /></span>
+            <span className="footer__cta-label">{ctaContent.label}</span>
+            <span className="footer__cta-link">{ctaContent.link} <ArrowUpRight size={18} strokeWidth={2} /></span>
           </Link>
         </div>
 
         <div className="footer__grid">
           <div className="footer__col">
-            <p className="footer__logo">Zeeshan</p>
-            <p className="footer__role">Web Developer</p>
+            <p className="footer__logo">{personal.name}</p>
+            <p className="footer__role">{personal.role}</p>
             <p className="footer__desc">
-              Building thoughtful websites and web applications with a focus
-              on design, performance and functionality.
+              {footerContent.description}
             </p>
           </div>
 
           <div className="footer__col">
             <p className="footer__heading">Navigation</p>
             <ul className="footer__list">
-              <li><Link to="/work">Work</Link></li>
-              <li><Link to="/services">Services</Link></li>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/process">Process</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
+              {navigation.map((link) => (
+                <li key={link.to}><Link to={link.to}>{link.label}</Link></li>
+              ))}
             </ul>
           </div>
 
@@ -38,28 +40,28 @@ export default function Footer() {
             <p className="footer__heading">Connect</p>
             <ul className="footer__list">
               <li>
-                <a href="https://github.com/zeeshanbhatti0109/" target="_blank" rel="noreferrer">
+                <a href={personal.social.github} target="_blank" rel="noreferrer">
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com/in/zeeshanbhatti-45aa02378/" target="_blank" rel="noreferrer">
+                <a href={personal.social.linkedin} target="_blank" rel="noreferrer">
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href="mailto:zeeshanbhatti0109@gmail.com">
-                  zeeshanbhatti0109@gmail.com
+                <a href={`mailto:${personal.email}`}>
+                  {personal.email}
                 </a>
               </li>
-              <li className="footer__muted">Multan, Pakistan</li>
+              <li className="footer__muted">{personal.location}</li>
             </ul>
           </div>
         </div>
 
         <div className="footer__bottom">
-          <p>© {year} Zeeshan. All rights reserved.</p>
-          <p className="footer__muted">Designed &amp; built from scratch.</p>
+          <p>© {year} {personal.name}. All rights reserved.</p>
+          <p className="footer__muted">{footerContent.bottomText}</p>
         </div>
       </div>
     </footer>

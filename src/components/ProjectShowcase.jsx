@@ -4,14 +4,14 @@ import ProjectVisual from "./ProjectVisual";
 import Reveal from "./Reveal";
 
 export default function ProjectShowcase({ project }) {
-  const { slug, index, name, tagline, category, tech, layout } = project;
+  const { slug, index, name, tagline, category, tech, layout, image } = project;
 
   if (layout === "featured") {
     return (
       <Reveal as="article" className="project project--featured">
         <Link to={`/work/${slug}`} className="project__link">
           <div className="project__visual project__visual--large">
-            <ProjectVisual slug={slug} />
+            <ProjectVisual slug={slug} image={image} />
           </div>
           <div className="project__meta">
             <div className="project__meta-top">
@@ -37,7 +37,7 @@ export default function ProjectShowcase({ project }) {
       <Reveal as="article" className="project project--split">
         <Link to={`/work/${slug}`} className="project__link project__link--split">
           <div className="project__visual">
-            <ProjectVisual slug={slug} />
+            <ProjectVisual slug={slug} image={image} />
           </div>
           <div className="project__meta">
             <div className="project__meta-top">
@@ -63,7 +63,7 @@ export default function ProjectShowcase({ project }) {
     <Reveal as="article" className="project project--compact">
       <Link to={`/work/${slug}`} className="project__link project__link--compact">
         <div className="project__visual project__visual--small">
-          <ProjectVisual slug={slug} />
+          <ProjectVisual slug={slug} image={image} />
         </div>
         <div className="project__meta">
           <div className="project__meta-top">

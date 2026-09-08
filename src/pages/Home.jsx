@@ -5,13 +5,15 @@ import CapabilitiesGrid from "../sections/CapabilitiesGrid";
 import SelectedWorkPreview from "../sections/SelectedWorkPreview";
 import SeoDifferentiator from "../sections/SeoDifferentiator";
 import CtaBanner from "../sections/CtaBanner";
+import { getSeoConfig } from "../data/config";
 
 export default function Home() {
+  const seoConfig = getSeoConfig("home");
   return (
     <>
       <SEO
-        title="Web Developer"
-        description="Zeeshan builds business websites, WordPress sites, React interfaces and Laravel applications for businesses ready to move forward."
+        title={seoConfig.title}
+        description={seoConfig.description}
       />
       <Hero />
       <CapabilityStrip />

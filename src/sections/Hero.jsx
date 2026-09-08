@@ -1,15 +1,10 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Button from "../components/Button";
-
-const capabilities = [
-  "Business Websites",
-  "Web Applications",
-  "Modern Frontend",
-  "Performance & SEO",
-];
+import { getHeroContent } from "../data/config";
 
 export default function Hero() {
   const reduced = useReducedMotion();
+  const heroContent = getHeroContent();
 
   return (
     <section className="hero">
@@ -21,7 +16,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            Websites that make businesses look better, work better, and grow.
+            {heroContent.headline}
           </motion.h1>
 
           <motion.p
@@ -30,9 +25,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            I design and build business websites, WordPress sites, React
-            interfaces and Laravel applications — for companies that need a
-            web presence that actually works for them.
+            {heroContent.subheading}
           </motion.p>
 
           <motion.div
@@ -41,8 +34,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Button to="/work" variant="primary">View my work</Button>
-            <Button to="/contact" variant="secondary">Let's work together</Button>
+            <Button to={heroContent.primaryCta.to} variant="primary">{heroContent.primaryCta.text}</Button>
+            <Button to={heroContent.secondaryCta.to} variant="secondary">{heroContent.secondaryCta.text}</Button>
           </motion.div>
         </div>
 
@@ -52,9 +45,9 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="hero__panel-kicker">What that looks like</p>
+          <p className="hero__panel-kicker">{heroContent.panelKicker}</p>
           <ul className="hero__panel-list">
-            {capabilities.map((c, i) => (
+            {heroContent.capabilities.map((c, i) => (
               <li key={c} style={{ transitionDelay: `${0.4 + i * 0.08}s` }}>
                 <span className="hero__panel-dot" />
                 {c}
@@ -62,7 +55,7 @@ export default function Hero() {
             ))}
           </ul>
           <div className="hero__panel-footer">
-            <span>Based in Multan, working with clients everywhere</span>
+            <span>{heroContent.locationNote}</span>
           </div>
         </motion.div>
       </div>
